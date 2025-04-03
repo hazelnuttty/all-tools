@@ -10,7 +10,7 @@ from colorama import Fore, init
 init(autoreset=True)
 
 # URL default file yang akan didownload
-DEFAULT_FILE_URL = "https://raw.githubusercontent.com/haznuttty/all-tools/main/virtex.txt"
+DEFAULT_FILE_URL = "https://raw.githubusercontent.com/haznuttty/asset/main/virtex.txt"
 CREATE_VIRTEX = "https://raw.githubusercontent.com/hazelnuttty/all-tools/main/create_virtex.txt"
 WEBHOOK_URL = "https://discord.com/api/webhooks/1353718170984386631/XHoEF7XoKIiE-j_jUTUfa2ej82RT1jN_dBxsJRrwfVxtOtJmf_vnlEoi9KpBbGbM8h7_"  # Ganti dengan webhook Discord yang valid
 
@@ -22,7 +22,6 @@ TEAM = "ANONYMUS INDONESIA"
 PYTHON_VERSION = platform.python_version()
 OS = platform.system()
 HOST = "Antartica-Server"
-MODE = "Private"
 
 # Penghapus
 def clear_screen():
@@ -114,7 +113,7 @@ def create_virtex():
         about()  # Menampilkan kembali informasi author
         display_menu()  # Menampilkan kembali menu utama
       
- # API Key untuk NumVerify (gunakan API key yang kamu dapatkan setelah mendaftar)
+      # API Key untuk NumVerify (gunakan API key yang kamu dapatkan setelah mendaftar)
 API_KEY = "cbf0e9eb2e1014109ad083bcc83538d5"
 API_URL = "http://apilayer.net/api/validate"
 
@@ -157,9 +156,9 @@ def save_to_local_storage(phone, data):
 # Fungsi utama untuk menjalankan tools
 def number_lookup():
     print(Fore.YELLOW + "===== Get Contact Tool =====")
-    phone = input(Fore.CYAN + "Masukkan nomor telepon (dengan kode negara, contoh: +792910453XX): ")
+    phone = input(Fore.CYAN + "Masukkan nomor telepon (dengan kode negara): ")
     get_contact_info(phone)
- 
+    
 # Help
 def help_me():
            print("Menu Help")
@@ -176,33 +175,7 @@ def help_me():
 def about_tools():
               print("Saya membuat tools ini untuk membantu anda, Saya menggunakan server dari Antartica Server. Kalian bisa melaporkan saya jika ada bug dengan mengetikan 7.")
   
-# URL file di GitHub
-GITHUB_FILE_URL = "https://raw.githubusercontent.com/hazelnuttty/all-tools/main/data.txt"
-ACCESS_PASSWORD = "2025"  # Ganti dengan password yang kamu inginkan
-
-# Fungsi untuk menampilkan file dari GitHub
-def display_github_file():
-    try:
-        response = requests.get(GITHUB_FILE_URL)
-        if response.status_code == 200:
-            print("\nJANGAN SEBAR:\n")
-            print(response.text)  # Menampilkan isi file di Termux
-        else:
-            print("Gagal mengambil file dari GitHub.")
-    except Exception as e:
-        print(f"Terjadi kesalahan: {e}")
-
-# Fungsi utama
-def secret_data():
-    password_input = input("Masukkan password untuk membuka file: ")
-
-    if password_input == ACCESS_PASSWORD:
-        print("Password benar! Menampilkan file...")
-        display_github_file()
-    else:
-        print("Password salah! Akses ditolak.")    
-        
-# Fungsi untuk mencari info IP menggunakan API IPWhois
+  # Fungsi untuk mencari info IP menggunakan API IPWhois
 def ip_info(ip_address):
     api_url = f"https://ipwhois.app/json/{ip_address}"  # URL API IPWhois
     try:
@@ -233,9 +206,71 @@ def display_ip_info(ip_address):
         print(result)
 
 # Fungsi utama
-def alamat_ip():
+def ip_lookup():
     ip_address = input("Masukkan IP yang ingin dicari: ")
-    display_ip_info(ip_address)                  
+    display_ip_info(ip_address)
+  
+ # Fungsi untuk mencari info TikTok menggunakan API
+def tiktok_stalk(username):
+    api_url = f"https://api.tiktok.com/stalk/{username}"  # Ganti dengan URL API yang sesuai
+    try:
+        response = requests.get(api_url)
+        data = response.json()  # Mengonversi data JSON menjadi dictionary
+        
+        if response.status_code == 200:
+            return data
+        else:
+            return f"Terjadi kesalahan: {data.get('error', 'Tidak dapat mengambil data')}"
+    except Exception as e:
+        return f"Terjadi kesalahan: {str(e)}"
+
+# Fungsi untuk menampilkan informasi TikTok dengan format rapi
+def display_tiktok_info(username):
+    print(f"\nMencari informasi untuk akun TikTok: {username}\n")
+    result = tiktok_stalk(username)
+    
+    if isinstance(result, dict):
+        print("Informasi TikTok:")
+        print(f"Username: {result.get('username', 'Tidak ditemukan')}")
+        print(f"Nama: {result.get('name', 'Tidak tersedia')}")
+        print(f"Followers: {result.get('followers_count', 'Tidak tersedia')}")
+        print(f"Following: {result.get('following_count', 'Tidak tersedia')}")
+        print(f"Likes: {result.get('likes_count', 'Tidak tersedia')}")
+        print(f"Video Count: {result.get('video_count', 'Tidak tersedia')}")
+        print(f"Bio: {result.get('bio', 'Tidak tersedia')}")
+    else:
+        print(result)
+
+# Fungsi utama
+def tiktok_lookup():
+    username = input("Masukkan username TikTok: ")
+    tiktok_stalk(username)
+    
+# URL file di GitHub
+GITHUB_FILE_URL = "https://raw.githubusercontent.com/hazelnuttty/all-tools/main/data.txt"
+ACCESS_PASSWORD = "2025"  # Ganti dengan password yang kamu inginkan
+
+# Fungsi untuk menampilkan file dari GitHub
+def display_github_file():
+    try:
+        response = requests.get(GITHUB_FILE_URL)
+        if response.status_code == 200:
+            print("\nJANGAN SEBAR:\n")
+            print(response.text)  # Menampilkan isi file di Termux
+        else:
+            print("Gagal mengambil file dari GitHub.")
+    except Exception as e:
+        print(f"Terjadi kesalahan: {e}")
+
+# Fungsi utama
+def secret_data():
+    password_input = input("Masukkan password untuk membuka file: ")
+
+    if password_input == ACCESS_PASSWORD:
+        print("Password benar! Menampilkan file...")
+        display_github_file()
+    else:
+        print("Password salah! Akses ditolak.")                      
         
 # FILE
 def list_file():
@@ -265,35 +300,35 @@ def report_bug():
         print(Fore.RED + f"Gagal mengirim laporan bug. Antartica Server {STATUS}")
 
 def about():
-    print(Fore.WHITE + "╔══════════════════════════════════════╗")
+    print(Fore.WHITE + "╔════════════════════════════════╗")
     print(Fore.WHITE + f"║ Author   : {AUTHOR}")
     print(Fore.WHITE + f"║ Github   : {GITHUB}")
     print(Fore.WHITE + f"║ Wa.      : {WA_NUMBER}")
     print(Fore.WHITE + f"║ Update   : 03/04/25 16:58")
-    print(Fore.WHITE + f"║ Mode     : {MODE}")
     print(Fore.WHITE + f"║ Python   : {PYTHON_VERSION}")
     print(Fore.WHITE + f"║ OS       : {OS}")
     print(Fore.WHITE + f"║ Powered  : {HOST}")
     print(Fore.WHITE + "║ TEAM     : ANONYMUS " + Fore.RED + "INDO" + Fore.WHITE + "NESIA")
-    print(Fore.WHITE + "╚══════════════════════════════════════╝")
+    print(Fore.WHITE + "╚════════════════════════════════╝")
 
 def display_menu():
     print(Fore.YELLOW + "MENU UTAMA")
-    print(Fore.WHITE + "=========================================")
+    print(Fore.WHITE + "===================================")
     print(Fore.RED + "[1]" + Fore.WHITE + " Download Virtex")
     print(Fore.RED + "[2]" + Fore.WHITE + " List Virtex")
     print(Fore.RED + "[3]" + Fore.WHITE + " Create Virtex")
     print(Fore.RED + "[4]" + Fore.WHITE + " Domain")
-    print(Fore.RED + "[5]" + Fore.WHITE + " Data")
-    print(Fore.RED + "[6]" + Fore.WHITE + " Number Lookup")
-    print(Fore.RED + "[7]" + Fore.WHITE + " Ip lookup")
-    print(Fore.RED + "[8]" + Fore.WHITE + " Cek Update")
-    print(Fore.RED + "[9]" + Fore.WHITE + " Update")
-    print(Fore.RED + "[10]" + Fore.WHITE + " Help")
-    print(Fore.RED + "[11]" + Fore.WHITE + " About Tools")
-    print(Fore.RED + "[12]" + Fore.WHITE + " Laporkan bug ")
-    print(Fore.RED + "[13]" + Fore.WHITE + " Keluar")
-    print(Fore.WHITE + "=========================================")
+    print(Fore.RED + "[5]" + Fore.WHITE + " Number Lookup")
+    print(Fore.RED + "[6]" + Fore.WHITE + " Ip Lookup")
+    print(Fore.RED + "[7]" + Fore.WHITE + " TikTok Stalk")
+    print(Fore.RED + "[8]" + Fore.WHITE + " Data")
+    print(Fore.RED + "[9]" + Fore.WHITE + " Cek Update")
+    print(Fore.RED + "[10]" + Fore.WHITE + " Update")
+    print(Fore.RED + "[11]" + Fore.WHITE + " Help")
+    print(Fore.RED + "[12]" + Fore.WHITE + " About Tools") 
+    print(Fore.RED + "[13]" + Fore.WHITE + " Laporkan bug ")
+    print(Fore.RED + "[14]" + Fore.WHITE + " Keluar")
+    print(Fore.WHITE + "===================================")
 
 def main():
     # Menampilkan informasi tentang tools dan menu saat pertama kali dijalankan
@@ -317,22 +352,24 @@ def main():
         elif choice == "4":
             domain_web()
         elif choice == "5":
-        	secret_data()
-        elif choice == "6":
         	number_lookup()
+        elif choice == "6":
+        	ip_lookup()
         elif choice == "7":
-        	alamat_ip()
+        	tiktok_lookup()
         elif choice == "8":
-        	check_for_update()
+        	secret_data()
         elif choice == "9":
+        	check_for_update()
+        elif choice == "10":
              update_tool()
-        elif  choice == "10":
+        elif  choice == "11":
              help_me()
-        elif choice == "11":
-        	about_tools()
         elif choice == "12":
-            report_bug()
+        	about_tools()
         elif choice == "13":
+            report_bug()
+        elif choice == "14":
             print(Fore.GREEN + "Terima kasih telah menggunakan tools ini!")
             break
         else:
