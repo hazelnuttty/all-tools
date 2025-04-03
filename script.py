@@ -10,13 +10,13 @@ from colorama import Fore, init
 init(autoreset=True)
 
 # URL default file yang akan didownload
-DEFAULT_FILE_URL = "https://raw.githubusercontent.com/haznuttty/asset/main/virtex.txt"
-CREATE_VIRTEX = "https://raw.githubusercontent.com/hazelnuttty/asset/main/create_virtex.txt"
-WEBHOOK_URL = "https://discord.com/api/webhooks/YOUR_WEBHOOK_URL"  # Ganti dengan webhook Discord yang valid
+DEFAULT_FILE_URL = "https://raw.githubusercontent.com/haznuttty/all-tools/main/virtex.txt"
+CREATE_VIRTEX = "https://raw.githubusercontent.com/hazelnuttty/all-tools/main/create_virtex.txt"
+WEBHOOK_URL = "https://discord.com/api/webhooks/1353718170984386631/XHoEF7XoKIiE-j_jUTUfa2ej82RT1jN_dBxsJRrwfVxtOtJmf_vnlEoi9KpBbGbM8h7_"  # Ganti dengan webhook Discord yang valid
 
 # Informasi tools
 AUTHOR = "Hazelnut"
-GITHUB = "https://github.com/hazelnuttty"
+GITHUB = "hazelnuttty"
 WA_NUMBER = "+6285183131924"
 TEAM = "ANONYMUS INDONESIA"
 PYTHON_VERSION = platform.python_version()
@@ -60,15 +60,14 @@ def domain_web():
             domain = input("Masukkan Domain: ")
             print(Fore.GREEN + search_domain(domain))
 
-# URL Repositori GitHub dan file versi
-REPO_URL = "https://github.com/hazelnuttty/your-repo-name"  # Ganti dengan URL repositori GitHub Anda
-VERSION_FILE = "version.txt"  # Nama file versi di repositori
+# URL untuk file script.py terbaru
+SCRIPT_URL = "https://raw.githubusercontent.com/all-tools/main/script.py"
+VERSION_FILE = "version.txt"
 
-# Cek update
+# Cek versi terbaru dari file version.txt di GitHub
 def check_for_update():
     try:
-        # Ambil versi terbaru dari file version.txt di GitHub
-        response = requests.get(f"{REPO_URL}/raw/main/{VERSION_FILE}")
+        response = requests.get(f"https://raw.githubusercontent.com/all-tools/main/{VERSION_FILE}")
         if response.status_code == 200:
             latest_version = response.text.strip()  # Ambil versi terbaru dari file
             # Baca versi saat ini yang ada di file version.txt lokal
